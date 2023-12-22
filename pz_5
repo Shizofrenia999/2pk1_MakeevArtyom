@@ -1,0 +1,22 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        double start = -2;
+        double end = 2;
+        double step = 0.5;
+
+        Console.WriteLine("Аргумент\tЗначение функции");
+        Console.WriteLine("-------------------------");
+
+        for (double x = start; x <= end; x += step)
+        {
+            double y = -2.4 * x * x + 5 * x - 3;
+            Console.WriteLine($"{x}\t\t{y}");
+        }
+
+        Console.ReadLine();
+    }
+}
