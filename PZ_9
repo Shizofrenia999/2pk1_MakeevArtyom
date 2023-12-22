@@ -1,0 +1,56 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string expression = "10+5-3+2";
+
+        // Инициализация переменных
+        int result = 0;
+        int currentNumber = 0;
+        char currentOperator = '+';
+
+        // Обработка строки
+        foreach (char c in expression)
+        {
+            if (char.IsDigit(c))
+            {
+                // Если символ - цифра, добавляем его к текущему числу
+                currentNumber = currentNumber * 10 + (c - '0');
+            }
+            else if (c == '+' || c == '-')
+            {
+                // Если символ - оператор, выполняем предыдущую операцию и обновляем текущий оператор
+                result = PerformOperation(result, currentNumber, currentOperator);
+                currentOperator = c;
+                currentNumber = 0;
+            }
+            else
+            {
+                // Если символ не является цифрой или оператором, выводим ошибку и выходим из программы
+                Console.WriteLine("Ошибка: недопустимый символ в выражении");
+                return;
+            }
+        }
+
+        // Выполняем последнюю операцию
+        result = PerformOperation(result, currentNumber, currentOperator);
+
+        // Выводим результат
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static int PerformOperation(int operand1, int operand2, char operation)
+    {
+        // Выполняем операцию в зависимости от оператора
+        if (operation == '+')
+        {
+            return operand1 + operand2;
+        }
+        else
+        {
+            return operand1 - operand2;
+        }
+    }
+}
