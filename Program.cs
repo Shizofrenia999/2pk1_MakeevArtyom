@@ -1,40 +1,29 @@
-﻿namespace pz10
+﻿namespace ConsoleApp1
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            for(int i = 0; i < 3; i++)
+        {
+                Console.WriteLine($"Введите значение основания треугольника { i + 1}:");
+                double a = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Введите несколько строк(для завершения введите пустую строку):");
+                Console.WriteLine($"Введите значение высоты треугольника { i + 1}:");
+                double h = Convert.ToDouble(Console.ReadLine());
 
-            List<string> inputStrings = new List<string>();
-            String input;
-            do
-            {
-                input = Console.ReadLine();
-                if(!string.IsNullOrWhiteSpace(input))
-                {
-                    inputStrings.Add(input);
-                }
-            } 
-            while (!string.IsNullOrWhiteSpace(input)) ;
-
-            String concatenatedString = String.Join(" ", inputStrings); // конкатенация строк
-            String[] words = concatenatedString.Split(' '); // разделение строки на слова
-
-            List<string> uniqueWords = new List<string>();
-            // Проверка на уникальность слов и их удаление, если они повторяются
-            foreach(string word in words)
-            {
-                if(!uniqueWords.Contains(word))
-                {
-                    uniqueWords.Add(word);
-                }
+                double perimeter = Triangle(a, h);
+                Console.WriteLine($"Периметр треугольника { i + 1} равен: { perimeter}");
             }
-            String resultString = String.Join(" ", uniqueWords); // объединение уникальных слов в строку
-            Console.WriteLine("Результат после конкатенации и удаления повторяющихся слов:");
-            Console.WriteLine(resultString);
-
         }
+
+        static double Triangle(double a, double h)
+        { 
+            double v = Math.Pow(a/2.0, 2);
+            double b = v + Math.Pow(h, 2);
+            double perimeter = 2 * Math.Sqrt(b) + a;
+            return perimeter;
+        }
+
     }
 }
