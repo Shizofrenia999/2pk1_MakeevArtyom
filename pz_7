@@ -1,0 +1,44 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Инициализация матрицы
+        int[,] matrix = {
+            { 5, 10, 15 },
+            { 2, 20, 8 },
+            { 7, 3, 12 }
+        };
+
+        int rowCount = matrix.GetLength(0);
+        int colCount = matrix.GetLength(1);
+
+        // Нахождение наименьших элементов в каждом столбце
+        int[] column = new int[colCount];
+        for (int j = 0; j < colCount; j++)
+        {
+            int minn = matrix[0, j];
+            for (int i = 1; i < rowCount; i++)
+            {
+                if (matrix[i, j] < minn)
+                {
+                    minn = matrix[i, j];
+                }
+            }
+            column[j] = minn;
+        }
+
+        // Нахождение максимума из наименьших элементов
+        int max = column[0];
+        for (int j = 1; j < colCount; j++)
+        {
+            if (column[j] > max)
+            {
+                max = column[j];
+            }
+        }
+
+        Console.WriteLine("Максимум из наименьших элементов столбцов: " + max);
+    }
+}
