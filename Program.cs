@@ -1,46 +1,40 @@
-﻿using System;
-
-class Program
+﻿namespace pz10
 {
-    static void Main(string[] args)
+    internal class Program
     {
-        Random random = new Random();
-        int[] array = new int[10];
-        int count = 0;
-
-        for (int i = 0; i < array.Length; i++)
+        static void Main(string[] args)
         {
-            array[i] = random.Next(20, 101);
-            if (array[i] % 10 == 0)
+
+            Console.WriteLine("Введите несколько строк(для завершения введите пустую строку):");
+
+            List<string> inputStrings = new List<string>();
+            String input;
+            do
             {
-                count++;
-            }
-        }
+                input = Console.ReadLine();
+                if(!string.IsNullOrWhiteSpace(input))
+                {
+                    inputStrings.Add(input);
+                }
+            } 
+            while (!string.IsNullOrWhiteSpace(input)) ;
 
-        int[] newArray = new int[count];
-        int index = 0;
+            String concatenatedString = String.Join(" ", inputStrings); // конкатенация строк
+            String[] words = concatenatedString.Split(' '); // разделение строки на слова
 
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i] % 10 == 0)
+            List<string> uniqueWords = new List<string>();
+            // Проверка на уникальность слов и их удаление, если они повторяются
+            foreach(string word in words)
             {
-                newArray[index] = array[i];
-                index++;
+                if(!uniqueWords.Contains(word))
+                {
+                    uniqueWords.Add(word);
+                }
             }
-        }
+            String resultString = String.Join(" ", uniqueWords); // объединение уникальных слов в строку
+            Console.WriteLine("Результат после конкатенации и удаления повторяющихся слов:");
+            Console.WriteLine(resultString);
 
-        Console.WriteLine("Исходный массив:");
-        foreach (int number in array)
-        {
-            Console.Write(number + " ");
-        }
-
-        Console.WriteLine();
-
-        Console.WriteLine("Массив чисел, оканчивающихся на 0:");
-        foreach (int number in newArray)
-        {
-            Console.Write(number + " ");
         }
     }
 }
